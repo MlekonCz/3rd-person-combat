@@ -11,6 +11,10 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private float mouseX;
     [SerializeField] private float mouseY;
 
+    public bool b_Input;
+    public bool rollFlag;
+    public bool isInteracting;
+
     private PlayerControls inputActions;
     private CameraHandler cameraHandler;
 
@@ -38,9 +42,9 @@ public class InputHandler : MonoBehaviour
         if (inputActions == null)
         {
             inputActions = new PlayerControls();
-            inputActions.PlayerMovement.Movement.performed += inputActions
-                => movementInput = inputActions.ReadValue<Vector2>();
-            inputActions.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue<Vector2>();
+            inputActions.PlayerMovement.Movement.performed += movementInputActions
+                => movementInput = movementInputActions.ReadValue<Vector2>();
+            inputActions.PlayerMovement.Camera.performed += cameraInputActions => cameraInput = cameraInputActions.ReadValue<Vector2>();
         }
         inputActions.Enable();
     }
@@ -53,6 +57,7 @@ public class InputHandler : MonoBehaviour
     public void TickInput(float delta)
     {
         MoveInput(delta);
+        HandleRollingInput(delta);
     }
 
     private void MoveInput(float delta)
@@ -64,8 +69,15 @@ public class InputHandler : MonoBehaviour
         mouseY = cameraInput.y;
 
     }
-    
-    
+
+    private void HandleRollingInput(float delta)
+    {
+        b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed; 
+        if (b_Input)
+        {
+            rollFlag = true;
+        }
+    }
     
     
     
