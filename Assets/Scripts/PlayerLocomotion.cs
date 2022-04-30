@@ -9,6 +9,7 @@ public class PlayerLocomotion : MonoBehaviour
     private Transform _cameraObject;
     private InputHandler _inputHandler;
     private Vector3 moveDirection;
+    private PlayerManager _playerManager;
 
     [HideInInspector] public Transform myTransform;
     [HideInInspector] public AnimatorHandler animatorHandler;
@@ -16,16 +17,17 @@ public class PlayerLocomotion : MonoBehaviour
     public new Rigidbody rigidbody;
     public GameObject normalCamera;
 
-    [Header("Stats")] 
+    [Header("Movement Stats")] 
     [SerializeField] private float movementSpeed = 5f;
     [SerializeField] private float sprintSpeed = 7f;
     [SerializeField] private float rotationSpeed = 10f;
 
-    public bool isSprinting;
+    
     
     
     void Start()
     {
+        _playerManager = GetComponent<PlayerManager>();
         rigidbody = GetComponent<Rigidbody>();
         _inputHandler = GetComponent<InputHandler>();
         animatorHandler = GetComponentInChildren<AnimatorHandler>();
@@ -34,15 +36,7 @@ public class PlayerLocomotion : MonoBehaviour
         animatorHandler.Initialize();
     }
 
-    private void Update()
-    {
-        float delta = Time.deltaTime;
-        isSprinting = _inputHandler.b_Input;
-        _inputHandler.TickInput(delta);
-        HandleMovement(delta);
-        HandleRollingAndSprinting(delta);
-        
-    }
+   
 
     #region Movement
 
@@ -86,7 +80,7 @@ public class PlayerLocomotion : MonoBehaviour
         if (_inputHandler.sprintFlag)
         {
             speed = sprintSpeed;
-            isSprinting = true;
+            _playerManager.isSprinting = true;
             moveDirection *= speed;
         }
         else
@@ -98,7 +92,7 @@ public class PlayerLocomotion : MonoBehaviour
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projectedVelocity;
         
-        animatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0, isSprinting);
+        animatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0, _playerManager.isSprinting);
 
         if (animatorHandler.canRotate)
         {

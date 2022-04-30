@@ -8,37 +8,25 @@ public class InputHandler : MonoBehaviour
     [SerializeField] public float horizontal;
     [SerializeField] public float vertical;
     [SerializeField] public float moveAmount;
-    [SerializeField] private float mouseX;
-    [SerializeField] private float mouseY;
+    [SerializeField] public float mouseX;
+    [SerializeField] public float mouseY;
 
     public bool b_Input;
 
     public bool sprintFlag;
     public bool rollFlag;
     public float rollInputTimer;
-    public bool isInteracting;
+    
 
     private PlayerControls inputActions;
-    private CameraHandler cameraHandler;
+   
 
     private Vector2 movementInput;
     private Vector2 cameraInput;
 
-    private void Awake()
-    {
-        cameraHandler = CameraHandler.singleton;
-    }
+    
 
-    private void FixedUpdate()
-    {
-        float delta = Time.fixedDeltaTime;
-
-        if (cameraHandler != null)
-        {
-            cameraHandler.FollowTarget(delta);
-            cameraHandler.HandleCameraRotation(delta,mouseX, mouseY);
-        }
-    }
+    
 
     public void OnEnable()
     {

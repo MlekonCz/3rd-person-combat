@@ -4,15 +4,17 @@ namespace DefaultNamespace
 {
     public class AnimatorHandler : MonoBehaviour
     {
+        private PlayerManager _playerManager;
         public Animator animator;
-        public InputHandler inputHandler;
-        public PlayerLocomotion playerLocomotion;
+        private InputHandler inputHandler;
+        private PlayerLocomotion playerLocomotion;
         private int vertical;
         private int horizontal;
         public bool canRotate;
 
         public void Initialize()
         {
+            _playerManager = GetComponentInParent<PlayerManager>();
             animator = GetComponent<Animator>();
             inputHandler = GetComponentInParent<InputHandler>();
             playerLocomotion = GetComponentInParent<PlayerLocomotion>();
@@ -99,7 +101,7 @@ namespace DefaultNamespace
 
         private void OnAnimatorMove()
         {
-            if (inputHandler.isInteracting == false)
+            if (_playerManager.isInteracting == false)
             {
                 return;
             }
