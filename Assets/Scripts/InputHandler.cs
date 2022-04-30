@@ -12,7 +12,10 @@ public class InputHandler : MonoBehaviour
     [SerializeField] private float mouseY;
 
     public bool b_Input;
+
+    public bool sprintFlag;
     public bool rollFlag;
+    public float rollInputTimer;
     public bool isInteracting;
 
     private PlayerControls inputActions;
@@ -75,7 +78,18 @@ public class InputHandler : MonoBehaviour
         b_Input = inputActions.PlayerActions.Roll.phase == UnityEngine.InputSystem.InputActionPhase.Performed; 
         if (b_Input)
         {
-            rollFlag = true;
+            rollInputTimer += delta;
+            sprintFlag = true;
+        }
+        else
+        {
+            if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+            {
+                sprintFlag = false;
+                rollFlag = true;
+            }
+
+            rollInputTimer = 0f;
         }
     }
     

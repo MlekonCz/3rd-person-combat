@@ -18,7 +18,10 @@ public class PlayerLocomotion : MonoBehaviour
 
     [Header("Stats")] 
     [SerializeField] private float movementSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 7f;
     [SerializeField] private float rotationSpeed = 10f;
+
+    public bool isSprinting;
     
     
     void Start()
@@ -34,9 +37,11 @@ public class PlayerLocomotion : MonoBehaviour
     private void Update()
     {
         float delta = Time.deltaTime;
+        isSprinting = _inputHandler.b_Input;
         _inputHandler.TickInput(delta);
         HandleMovement(delta);
         HandleRollingAndSprinting(delta);
+        
     }
 
     #region Movement
@@ -69,18 +74,31 @@ public class PlayerLocomotion : MonoBehaviour
 
     public void HandleMovement(float delta)
     {
+        if (_inputHandler.rollFlag){return;}
+        
         moveDirection = _cameraObject.forward * _inputHandler.vertical;
         moveDirection += _cameraObject.right * _inputHandler.horizontal;
         moveDirection.Normalize();
         moveDirection.y = 0f;
 
         float speed = movementSpeed;
-        moveDirection *= speed;
+
+        if (_inputHandler.sprintFlag)
+        {
+            speed = sprintSpeed;
+            isSprinting = true;
+            moveDirection *= speed;
+        }
+        else
+        {
+            moveDirection *= speed;
+        }
+       
 
         Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
         rigidbody.velocity = projectedVelocity;
         
-        animatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0);
+        animatorHandler.UpdateAnimatorValues(_inputHandler.moveAmount, 0, isSprinting);
 
         if (animatorHandler.canRotate)
         {
