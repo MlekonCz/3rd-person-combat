@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     [Header("Player Flags")]
     public bool isSprinting;
     public bool isInteracting;
+    public bool isInAir;
+    public bool isGrounded;
     
     private void Awake()
     {
@@ -38,6 +40,7 @@ public class PlayerManager : MonoBehaviour
         _inputHandler.TickInput(delta);
         _playerLocomotion.HandleMovement(delta);
         _playerLocomotion.HandleRollingAndSprinting(delta);
+        _playerLocomotion.HandleFalling(delta,_playerLocomotion.moveDirection);
 
     }
     private void FixedUpdate()
@@ -56,7 +59,11 @@ public class PlayerManager : MonoBehaviour
         _inputHandler.rollFlag = false;
         _inputHandler.sprintFlag = false;
         isSprinting = _inputHandler.b_Input;
-        
+
+        if (isInAir)
+        {
+            _playerLocomotion.inAirTimer = _playerLocomotion.inAirTimer + Time.deltaTime;
+        }
         
     }
 }
