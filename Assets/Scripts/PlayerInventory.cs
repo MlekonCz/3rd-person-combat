@@ -8,8 +8,8 @@ public class PlayerInventory : MonoBehaviour
     private WeaponSlotManager _weaponSlotManager;
  
  
-    public WeaponItem rightWeapon;
-    public WeaponItem leftWeapon;
+    public WeaponItemDefinition rightWeapon;
+    public WeaponItemDefinition leftWeapon;
 
     private void Awake() 
     { 

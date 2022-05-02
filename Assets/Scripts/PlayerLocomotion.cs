@@ -92,7 +92,7 @@ public class PlayerLocomotion : MonoBehaviour
 
         float speed = _movementSpeed;
 
-        if (_inputHandler.sprintFlag)
+        if (_inputHandler.sprintFlag && _inputHandler.moveAmount >0.5f)
         {
             speed = _sprintSpeed;
             _playerManager.isSprinting = true;
@@ -100,7 +100,18 @@ public class PlayerLocomotion : MonoBehaviour
         }
         else
         {
-            moveDirection *= speed;
+            if (_inputHandler.moveAmount <0.5f)
+            {
+                moveDirection *= _walkingSpeed;
+                _playerManager.isSprinting = false;
+
+            }
+            else
+            {
+                _playerManager.isSprinting = false;
+                moveDirection *= speed;
+            }
+            
         }
        
 

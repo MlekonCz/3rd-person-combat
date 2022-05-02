@@ -25,17 +25,17 @@ public class WeaponHolderSlot : MonoBehaviour
       }
    }
    
-   public void LoadWeaponModel(WeaponItem weaponItem)
+   public void LoadWeaponModel(WeaponItemDefinition weaponItemDefinition)
    {
       UnloadWeaponAndDestroy();
       
-      if (weaponItem == null)
+      if (weaponItemDefinition == null)
       {
          UnloadWeapon();
          return;
          
       }
-      GameObject model = Instantiate(weaponItem.modelPrefab) as GameObject;
+      GameObject model = Instantiate(weaponItemDefinition.modelPrefab) as GameObject;
       if (model != null)
       {
          if (parentOverride != null)
