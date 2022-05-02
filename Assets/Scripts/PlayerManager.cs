@@ -64,7 +64,7 @@ public class PlayerManager : MonoBehaviour
 
         if (isInAir)
         {
-            _playerLocomotion.inAirTimer = _playerLocomotion.inAirTimer + Time.deltaTime;
+            _playerLocomotion.inAirTimer += Time.deltaTime;
         }
         
     }

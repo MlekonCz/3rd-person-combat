@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace DefaultNamespace
 {
@@ -88,7 +89,7 @@ namespace DefaultNamespace
             animator.CrossFade(targetAnim, 0.2f);
 
         }
-        
+
         public void CanRotate()
         {
             canRotate = true;
