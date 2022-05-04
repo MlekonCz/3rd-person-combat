@@ -194,7 +194,7 @@ public class PlayerLocomotion : MonoBehaviour
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("Locomotion", false);
+                    animatorHandler.PlayTargetAnimation("Empty", false);
                     inAirTimer = 0f;
                 }
 
@@ -221,19 +221,16 @@ public class PlayerLocomotion : MonoBehaviour
                 _playerManager.isInAir = true;
             }
         }
-
-        if (_playerManager.isGrounded)
-        {
-            if (_playerManager.isInteracting || _inputHandler.moveAmount > 0)
-            {
-                myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime);
-            }
-            else
-            {
-                myTransform.position = targetPosition;
-            }
+        
+        if (_playerManager.isInteracting || _inputHandler.moveAmount > 0)
+        { 
+            myTransform.position = Vector3.Lerp(myTransform.position, targetPosition, Time.deltaTime / 0.1f);
         }
-
+        else
+        { 
+            myTransform.position = targetPosition;
+        }
+            
     }
 
     #endregion
