@@ -100,6 +100,16 @@ namespace DefaultNamespace
             canRotate = false;
         }
 
+        public void EnableCombo()
+        {
+            animator.SetBool("canDoCombo", true);
+        }
+
+        public void DisableCombo()
+        {
+            animator.SetBool("canDoCombo", false); 
+        }
+
         private void OnAnimatorMove()
         {
             if (_playerManager.isInteracting == false)

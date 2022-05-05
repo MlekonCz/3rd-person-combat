@@ -17,13 +17,14 @@ public class InputHandler : MonoBehaviour
 
     public bool sprintFlag;
     public bool rollFlag;
+    public bool comboFlag;
     public float rollInputTimer;
     
 
     private PlayerControls _inputActions;
     private PlayerAttacker _playerAttacker;
     private PlayerInventory _playerInventory;
-   
+    private PlayerManager _playerManager;
 
     private Vector2 _movementInput;
     private Vector2 _cameraInput;
@@ -33,6 +34,7 @@ public class InputHandler : MonoBehaviour
     {
         _playerAttacker = GetComponent<PlayerAttacker>();
         _playerInventory = GetComponent<PlayerInventory>();
+        _playerManager = GetComponent<PlayerManager>();
     }
 
     public void OnEnable()
@@ -97,13 +99,27 @@ public class InputHandler : MonoBehaviour
         //RB Input handles the RIGHT hand weapon's light attack
         if (rb_Input)
         {
-            _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+            if (_playerManager.canDoCombo)
+            {
+                comboFlag = true;
+                _playerAttacker.HandleWeaponCombo(_playerInventory.rightWeapon);
+                comboFlag = false;
+            }
+            else
+            {
+                if (_playerManager.isInteracting){return;}
+                if (_playerManager.canDoCombo){return;}
+                _playerAttacker.HandleLightAttack(_playerInventory.rightWeapon);
+            }
+            
         }
 
         //RB Input handles the RIGHT hand weapon's heavy attack
 
         if (rt_Input)
         {
+            if (_playerManager.isInteracting){return;}
+            if (_playerManager.canDoCombo){return;}
             _playerAttacker.HandleHeavyAttack(_playerInventory.rightWeapon);
         }
         
