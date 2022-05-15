@@ -1,6 +1,4 @@
-﻿using System;
-using DefaultNamespace;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour

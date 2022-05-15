@@ -17,6 +17,8 @@ MonoBehaviour:
   modelPrefab: {fileID: 337575036984179381, guid: e6068e09593f4774383bdbb5a10af299,
     type: 3}
   isUnarmed: 0
+  rightHandIdle: RightArmIdle_01
+  leftHandIdle: LeftArmIdle_01
   OH_Light_Attack_1: LightAttack_01
   OH_Light_Attack_2: LightAttack_02
   OH_Light_Attack_3: 
