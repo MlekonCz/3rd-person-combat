@@ -61,7 +61,10 @@ public class PlayerManager : MonoBehaviour
         _inputHandler.sprintFlag = false;
         _inputHandler.rb_Input = false;
         _inputHandler.rt_Input = false;
-        
+        _inputHandler.dPadRight = false;
+        _inputHandler.dPadLeft = false;
+        _inputHandler.dPadDown = false;
+        _inputHandler.dPadUp = false;
 
         if (isInAir)
         {

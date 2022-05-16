@@ -544,7 +544,7 @@ MonoBehaviour:
   m_BlockingObjects: 0
   m_BlockingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 1079
 --- !u!114 &772490524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1383,13 +1383,17 @@ MonoBehaviour:
   moveAmount: 0
   mouseX: 0
   mouseY: 0
+  rollInputTimer: 0
   b_Input: 0
   rb_Input: 0
   rt_Input: 0
   sprintFlag: 0
   rollFlag: 0
   comboFlag: 0
-  rollInputTimer: 0
+  dPadDown: 0
+  dPadUp: 0
+  dPadLeft: 0
+  dPadRight: 0
 --- !u!114 &1622434442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1421,6 +1425,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightWeapon: {fileID: 11400000, guid: 114afb0ea40aa9242b130d4953d6048b, type: 2}
   leftWeapon: {fileID: 11400000, guid: 114afb0ea40aa9242b130d4953d6048b, type: 2}
+  unarmedWeapon: {fileID: 11400000, guid: cde59b11172e5f94898fecf7d3f21b69, type: 2}
+  weaponsInRightHandSlots:
+  - {fileID: 11400000, guid: 114afb0ea40aa9242b130d4953d6048b, type: 2}
+  - {fileID: 11400000, guid: 7ae2a0c032c17d74c95e57ae9ccea74f, type: 2}
+  weaponsInLeftHandSlots:
+  - {fileID: 11400000, guid: 114afb0ea40aa9242b130d4953d6048b, type: 2}
+  - {fileID: 11400000, guid: 7ae2a0c032c17d74c95e57ae9ccea74f, type: 2}
+  currentRightWeaponIndex: -1
+  currentLeftWeaponIndex: -1
 --- !u!114 &1622434444
 MonoBehaviour:
   m_ObjectHideFlags: 0

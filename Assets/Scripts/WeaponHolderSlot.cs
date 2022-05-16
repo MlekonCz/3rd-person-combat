@@ -34,7 +34,7 @@ public class WeaponHolderSlot : MonoBehaviour
          UnloadWeapon();
          return;
          
-      }
+      } 
       GameObject model = Instantiate(weaponItemDefinition.modelPrefab) as GameObject;
       if (model != null)
       {

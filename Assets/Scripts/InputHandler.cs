@@ -10,15 +10,18 @@ public class InputHandler : MonoBehaviour
     [SerializeField] public float moveAmount;
     [SerializeField] public float mouseX;
     [SerializeField] public float mouseY;
-
+    public float rollInputTimer;
+    
     public bool b_Input;
     public bool rb_Input;
     public bool rt_Input;
-
     public bool sprintFlag;
     public bool rollFlag;
     public bool comboFlag;
-    public float rollInputTimer;
+    public bool dPadDown;
+    public bool dPadUp;
+    public bool dPadLeft;
+    public bool dPadRight;
     
 
     private PlayerControls _inputActions;
@@ -59,6 +62,7 @@ public class InputHandler : MonoBehaviour
         MoveInput(delta);
         HandleRollingInput(delta);
         HandleAttackInput(delta);
+        HandleQuickSlotInput();
     }
 
     private void MoveInput(float delta)
@@ -124,5 +128,24 @@ public class InputHandler : MonoBehaviour
         }
         
     }
+
+    private void HandleQuickSlotInput()
+    {
+        _inputActions.PlayerQuickSlots.DPadRight.performed += i => dPadRight = true;
+        _inputActions.PlayerQuickSlots.DPadLeft.performed += i => dPadLeft = true;
+        if (dPadRight)
+        { 
+            _playerInventory.ChangeRightWeapon();    
+        }
+        else if (dPadLeft)
+        {
+            _playerInventory.ChangeLeftWeapon();    
+        }
+
+    }
+    
+    
+    
+    
     
 }
