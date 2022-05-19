@@ -3,17 +3,30 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 { 
+        [Title("health")]
         public int healthLevel = 10;
         public int maxHealth;
         public int currentHealth;
-
         public HealthBar healthBar;
+
+        [Title("Stamina")] 
+        public int staminaLevel;
+        public int maxStamina;
+        public int currentStamina;
+        public StaminaBar staminaBar;
+        
+        
         private AnimatorHandler _animatorHandler;
         private void Start()
         {
                 maxHealth = SetMaxHealthFromHealthLevel();
                 currentHealth = maxHealth;
                 healthBar.SetMaxHealth(maxHealth);
+                
+                maxStamina = SetMaxStaminaFromStaminaLevel();
+                currentStamina = maxStamina;
+                staminaBar.SetMaxStamina(maxStamina);
+                
                 _animatorHandler = GetComponentInChildren<AnimatorHandler>();
         }
 
@@ -21,6 +34,11 @@ public class PlayerStats : MonoBehaviour
         {
                 maxHealth = healthLevel * 10;
                 return maxHealth;
+        }
+        private int SetMaxStaminaFromStaminaLevel()
+        {
+                maxStamina = staminaLevel * 10;
+                return maxStamina;
         }
 
         public void TakeDamage(int damage)
@@ -37,10 +55,10 @@ public class PlayerStats : MonoBehaviour
                 }
         }
 
-        [Button]
-        void TestDamaging()
+        public void TameStaminaDamage(int damage)
         {
-                TakeDamage(5);
+                currentStamina -= damage;
+                staminaBar.SetCurrentStamina(currentStamina);
         }
         
 }

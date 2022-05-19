@@ -15,7 +15,10 @@ public class WeaponItemDefinition : ItemDefinition
     public string OH_Light_Attack_2;
     public string OH_Light_Attack_3;
     public string OH_Heavy_Attack_1;
-    
-    
+
+    [Header("Stamina Costs")] 
+    public int baseStaminaDrain;
+    public float lightAttackMultiplier;
+    public float heavyAttackMultiplier;
 
 }

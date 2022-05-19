@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class WeaponSlotManager : MonoBehaviour
 {
+    public WeaponItemDefinition attackingWeapon;
+    
     private WeaponHolderSlot _leftHandSlot;
     private WeaponHolderSlot _rightHandSlot;
 
@@ -12,16 +14,22 @@ public class WeaponSlotManager : MonoBehaviour
     private DamageCollider _rightHandDamageCollider;
 
     private Animator _animator;
-
     private QuickSlotsUI _quickSlotsUI;
+    private PlayerStats _playerStats;
+
     
     
     private void Awake()
     {
         _animator = GetComponent<Animator>();
         _quickSlotsUI = FindObjectOfType<QuickSlotsUI>();
+        _playerStats = GetComponentInParent<PlayerStats>();
+        SetWeaponSlots();
+    }
+    private void SetWeaponSlots()
+    {
         WeaponHolderSlot[] weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
-        foreach (WeaponHolderSlot weaponSlot in  weaponHolderSlots)
+        foreach (WeaponHolderSlot weaponSlot in weaponHolderSlots)
         {
             if (weaponSlot.isLeftHandSlot)
             {
@@ -96,7 +104,17 @@ public class WeaponSlotManager : MonoBehaviour
         _leftHandDamageCollider.DisableDamageCollider();
     }
     #endregion
-  
+
+    #region HandleStaminaWeaponDrainage
+    public void DrainStaminaLightAttack()
+    {
+        _playerStats.TameStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStaminaDrain * attackingWeapon.lightAttackMultiplier));
+    }
+    public void DrainStaminaHeavyAttack()
+    {
+        _playerStats.TameStaminaDamage(Mathf.RoundToInt(attackingWeapon.baseStaminaDrain * attackingWeapon.heavyAttackMultiplier));
+    }
+    #endregion
     
     
     

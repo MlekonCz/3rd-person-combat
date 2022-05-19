@@ -193,6 +193,10 @@ MonoBehaviour:
   maxHealth: 0
   currentHealth: 0
   healthBar: {fileID: 0}
+  staminaLevel: 10
+  maxStamina: 0
+  currentStamina: 0
+  staminaBar: {fileID: 0}
 --- !u!1 &5636160981029168627
 GameObject:
   m_ObjectHideFlags: 0
@@ -341,6 +345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39fb3a7844358f14d8facdf779bd9c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackingWeapon: {fileID: 0}
 --- !u!1 &5636160979772149637 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 171930, guid: 507f5dc602b42c549a32a51aa9236bb1,
