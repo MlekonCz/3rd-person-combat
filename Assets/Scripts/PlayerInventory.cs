@@ -18,7 +18,8 @@ public class PlayerInventory : MonoBehaviour
 
     public int currentRightWeaponIndex = -1;
     public int currentLeftWeaponIndex = -1;
-    
+
+    public List<WeaponItemDefinition> weaponInventory;
     private void Awake() 
     { 
         _weaponSlotManager = GetComponentInChildren<WeaponSlotManager>();

@@ -11,7 +11,8 @@ public class InputHandler : MonoBehaviour
     [SerializeField] public float mouseX;
     [SerializeField] public float mouseY;
     public float rollInputTimer;
-    
+
+    public bool a_Input;
     public bool b_Input;
     public bool rb_Input;
     public bool rt_Input;
@@ -63,6 +64,7 @@ public class InputHandler : MonoBehaviour
         HandleRollingInput(delta);
         HandleAttackInput(delta);
         HandleQuickSlotInput();
+        HandleInteractingButtonInput();
     }
 
     private void MoveInput(float delta)
@@ -143,8 +145,12 @@ public class InputHandler : MonoBehaviour
         }
 
     }
-    
-    
+
+    private void HandleInteractingButtonInput()
+    {
+        _inputActions.PlayerActions.A.performed += i => a_Input = true;
+        
+    }
     
     
     
